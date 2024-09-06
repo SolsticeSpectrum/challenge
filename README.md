@@ -28,8 +28,8 @@ The following Python packages are required to run the challenge:
 To get started, clone the repository using Git:
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/SolsticeSpectrum/challenge.git
+cd challenge
 ```
 
 ### Step 2: Install Dependencies
