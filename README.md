@@ -16,18 +16,18 @@ In this challenge, your goal is to modify the `Encoder` class to correctly trans
 
 ## Requirements
 
-# Python
+### Python
 
 The following Python packages are required:
 
 - `numpy`
 - `Pillow`
 
-# Java
+### Java
 
 Install Java based on [these](https://openjdk.org/install/) instructions
 
-# Rust
+### Rust
 
 Install Rust:
 
@@ -56,17 +56,17 @@ pip install -r requirements.txt
 
 ### Step 3: Start Solving the Challenge
 
-# Python
+### Python
 
 Open the `EncodingChallenge.py` file and locate the `Encoder` class. You need to implement the `encode` function inside this class.
 Once you've implemented the `encode` function, you can run `python EncodingChallenge.py` to verify the solution.
 
-# Java
+### Java
 
 Open the `EncodingChallenge.java` file and locate the `Encoder` class. You need to implement the `encode` function inside this class.
 Once you've implemented the `encode` function, you can run `java EncodingChallenge.py` to verify the solution.
 
-# Rust
+### Rust
 
 Navigate to `rust_challenge` and open `decoder.rs` to study its implementation. Then you need to implement the `encode` function inside `encoder.rs`.
 Once you've implemented the `encode` function, you can run `cargo run` to verify the solution.
