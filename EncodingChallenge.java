@@ -242,16 +242,21 @@ public class EncodingChalenge {
         html.append("body { font-family: Arial, sans-serif; } .test-case { margin-bottom: 20px; border: 1px solid #ddd; padding: 10px; } ");
         html.append(".pass { color: green; } .fail { color: red; } img { max-width: 200px; max-height: 200px; margin: 5px; }");
         html.append("</style></head><body><h1>Encoding Challenge Test Results</h1>");
+        
+		int i = 0;
 
         for (TestResult result: testResults) {
             String statusClass = result.passed ? "pass" : "fail";
             html.append("<div class=\"test-case\">")
-                .append("<h2>Test Case: ").append(result.name).append(" - <span class=\"").append(statusClass).append("\">")
+                .append("<h2>Test Case ").append(i + 1).append(": ")
+				.append(result.name).append(" - <span class=\"").append(statusClass).append("\">")
                 .append(result.passed ? "PASS" : "FAIL").append("</span></h2>")
                 .append("<div><h3>Input Image:</h3><img src=\"").append(result.inputUri).append("\" alt=\"Input Image\"></div>")
                 .append("<div><h3>Expected Output:</h3><img src=\"").append(result.expectedUri).append("\" alt=\"Expected Output\"></div>")
                 .append("<div><h3>Actual Output:</h3><img src=\"").append(result.actualUri).append("\" alt=\"Actual Output\"></div>")
                 .append("</div>");
+			
+			i++;
         }
 
         html.append("</body></html>");
