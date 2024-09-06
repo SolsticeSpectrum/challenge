@@ -4,74 +4,74 @@ use std::cmp;
 pub struct Decoder;
 
 impl Decoder {
-	pub fn decode(input: &DynamicImage) -> DynamicImage {
-		// TODO: Analyze the code in this class and reflect the process
-		// Note: The variables in this class are deliberately minified
-			
-		let (w, h) = input.dimensions();
-		let mut output = ImageBuffer::new(w, h);
-    
-		for y in (0..h).step_by(4) {
-			for x in (0..w).step_by(4) {
-				let mut block = [0; 16];
-            
-				for by in 0..4 {
-					for bx in 0..4 {
-						let px = x + bx;
-						let py = y + by;
-                    
-						if px < w && py < h {
-							let rgb = input.get_pixel(px, py).0;
-							let color = [rgb[0] as i32, rgb[1] as i32, rgb[2] as i32];
-							block[by as usize * 4 + bx as usize] = Self::h_get(&color);
-						}
-					}
-				}
-            
-				for by in 0..4 {
-					for bx in 0..4 {
-						let px = x + bx;
-						let py = y + by;
-                    
-						if px < w && py < h {
-							let out = Self::m_read(&block, bx as i32, by as i32);
-							let out_rgb = ((out[3] as u32) << 24) | ((out[0] as u32) << 16) | ((out[1] as u32) << 8) | (out[2] as u32);
-							output.put_pixel(px, py, Rgba([
-								((out_rgb >> 16) & 0xFF) as u8,
-								((out_rgb >> 8) & 0xFF) as u8,
-								(out_rgb & 0xFF) as u8,
-								((out_rgb >> 24) & 0xFF) as u8,
-							]));
-						}
-					}
-				}
-			}
-		}
-    
-		DynamicImage::ImageRgba8(output)
-	}
+    pub fn decode(input: &DynamicImage) -> DynamicImage {
+        // TODO: Analyze the code in this class and reflect the process
+        // Note: The variables in this class are deliberately minified
+
+        let (w, h) = input.dimensions();
+        let mut output = ImageBuffer::new(w, h);
+
+        for y in (0..h).step_by(4) {
+            for x in (0..w).step_by(4) {
+                let mut block = [0; 16];
+
+                for by in 0..4 {
+                    for bx in 0..4 {
+                        let px = x + bx;
+                        let py = y + by;
+
+                        if px < w && py < h {
+                            let rgb = input.get_pixel(px, py).0;
+                            let color = [rgb[0] as i32, rgb[1] as i32, rgb[2] as i32];
+                            block[by as usize * 4 + bx as usize] = Self::h_get(&color);
+                        }
+                    }
+                }
+
+                for by in 0..4 {
+                    for bx in 0..4 {
+                        let px = x + bx;
+                        let py = y + by;
+
+                        if px < w && py < h {
+                            let out = Self::m_read(&block, bx as i32, by as i32);
+                            let out_rgb = ((out[3] as u32) << 24) | ((out[0] as u32) << 16) | ((out[1] as u32) << 8) | (out[2] as u32);
+                            output.put_pixel(px, py, Rgba([
+                                ((out_rgb >> 16) & 0xFF) as u8,
+                                ((out_rgb >> 8) & 0xFF) as u8,
+                                (out_rgb & 0xFF) as u8,
+                                ((out_rgb >> 24) & 0xFF) as u8,
+                            ]));
+                        }
+                    }
+                }
+            }
+        }
+
+        DynamicImage::ImageRgba8(output)
+    }
 
     const H_A: [u32; 80] = [
-		0x00c00000, 0x69d97f0a, 0x00da0005, 0x00fe00ca,
-		0x3e3a6b00, 0xb6ce2e0e, 0xcade1037, 0x0029bbc1,
-		0xbac3f500, 0x4526154e, 0x99f85900, 0x1367004f,
-		0x65003000, 0xe0df94bb, 0xef950000, 0x8dfe0723,
-		0xd7c90000, 0xa362002b, 0xba000030, 0xa2f7002b,
-		0xd71d83fc, 0x00cb0ff0, 0xf61c9200, 0x2b003b37,
-		0x4e2a9d00, 0x0025f2c9, 0x00e06095, 0x014fa90b,
-		0xe18f0015, 0xb11106d2, 0x240000bf, 0x005e72a4,
-		0x0097c421, 0x347d1799, 0xaf9b000b, 0x7700002f,
-		0x31051700, 0x003a00da, 0x95030000, 0x00000bd4,
-		0x57a10074, 0x26396a0c, 0x9f67f400, 0xb2257fa7,
-		0xa3b30012, 0x7b002349, 0x6a3c0090, 0x42285e94,
-		0x662695de, 0x003a00f3, 0x5c85f200, 0xc8b20079,
-		0x23171600, 0x2cf40773, 0x2600d1f0, 0x0003dc00,
-		0x4e00dbd0, 0x000bd200, 0x2200fccf, 0x33b450ba,
-		0x5f960c00, 0x00afc200, 0x334d5b85, 0x0d373224,
-		0x00c68600, 0x90000000, 0x04a5bdc0, 0x978119e6,
-		0x549a0f26, 0x5918e885, 0x00000004, 0xfd005a3f,
-		0xa3542960, 0x06006d2e, 0xfb005fc4, 0x00006384,
-		0x2a1dec10, 0xb8a50ace, 0xd6f2012d, 0x1f002a30,
+	0x00c00000, 0x69d97f0a, 0x00da0005, 0x00fe00ca,
+	0x3e3a6b00, 0xb6ce2e0e, 0xcade1037, 0x0029bbc1,
+	0xbac3f500, 0x4526154e, 0x99f85900, 0x1367004f,
+	0x65003000, 0xe0df94bb, 0xef950000, 0x8dfe0723,
+	0xd7c90000, 0xa362002b, 0xba000030, 0xa2f7002b,
+	0xd71d83fc, 0x00cb0ff0, 0xf61c9200, 0x2b003b37,
+	0x4e2a9d00, 0x0025f2c9, 0x00e06095, 0x014fa90b,
+	0xe18f0015, 0xb11106d2, 0x240000bf, 0x005e72a4,
+	0x0097c421, 0x347d1799, 0xaf9b000b, 0x7700002f,
+	0x31051700, 0x003a00da, 0x95030000, 0x00000bd4,
+	0x57a10074, 0x26396a0c, 0x9f67f400, 0xb2257fa7,
+	0xa3b30012, 0x7b002349, 0x6a3c0090, 0x42285e94,
+	0x662695de, 0x003a00f3, 0x5c85f200, 0xc8b20079,
+	0x23171600, 0x2cf40773, 0x2600d1f0, 0x0003dc00,
+	0x4e00dbd0, 0x000bd200, 0x2200fccf, 0x33b450ba,
+	0x5f960c00, 0x00afc200, 0x334d5b85, 0x0d373224,
+	0x00c68600, 0x90000000, 0x04a5bdc0, 0x978119e6,
+	0x549a0f26, 0x5918e885, 0x00000004, 0xfd005a3f,
+	0xa3542960, 0x06006d2e, 0xfb005fc4, 0x00006384,
+	0x2a1dec10, 0xb8a50ace, 0xd6f2012d, 0x1f002a30,
     ];
 
     fn h_h(x: i32) -> u32 {
