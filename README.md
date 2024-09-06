@@ -21,8 +21,6 @@ The following Python packages are required to run the challenge:
 - `numpy`
 - `Pillow`
 
-You can install these dependencies via `pip` using the provided `requirements.txt`.
-
 ## Instructions
 
 ### Step 1: Clone the Repository
