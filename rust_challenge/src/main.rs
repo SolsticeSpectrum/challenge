@@ -46,8 +46,7 @@ fn base64_to_image(string: &str) -> Result<DynamicImage> {
 
 fn results_page(test_results: &[TestResult]) -> String {
     let mut html = String::from(
-        r#"
-    <html>
+    r#"<html>
     <head>
         <style>
             body { font-family: Arial, sans-serif; }
