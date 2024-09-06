@@ -16,10 +16,24 @@ In this challenge, your goal is to modify the `Encoder` class to correctly trans
 
 ## Requirements
 
-The following Python packages are required to run the challenge:
+# Python
+
+The following Python packages are required:
 
 - `numpy`
 - `Pillow`
+
+# Java
+
+Install Java based on [these](https://openjdk.org/install/) instructions
+
+# Rust
+
+Install Rust:
+
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
 ## Instructions
 
@@ -32,9 +46,9 @@ git clone https://github.com/SolsticeSpectrum/challenge.git
 cd challenge
 ```
 
-### Step 2: Install Dependencies
+### Step 2: Install Dependencies (Python only)
 
-Make sure you have Python installed on your system. Then, install the necessary packages:
+Install the necessary packages:
 
 ```bash
 pip install -r requirements.txt
@@ -42,5 +56,17 @@ pip install -r requirements.txt
 
 ### Step 3: Start Solving the Challenge
 
+# Python
+
 Open the `EncodingChallenge.py` file and locate the `Encoder` class. You need to implement the `encode` function inside this class.
-Once you've implemented the `encode` function, you can run the provided test cases to verify your solution.
+Once you've implemented the `encode` function, you can run `python EncodingChallenge.py` to verify the solution.
+
+# Java
+
+Open the `EncodingChallenge.java` file and locate the `Encoder` class. You need to implement the `encode` function inside this class.
+Once you've implemented the `encode` function, you can run `java EncodingChallenge.py` to verify the solution.
+
+# Rust
+
+Navigate to `rust_challenge` and open `decoder.rs` to study its implementation. Then you need to implement the `encode` function inside `encoder.rs`.
+Once you've implemented the `encode` function, you can run `cargo run` to verify the solution.
